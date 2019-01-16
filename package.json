@@ -29,7 +29,7 @@
     "prettier": "^1.15.3"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
+    "/**/*.{js,jsx,json,css}": [
       "prettier --single-quote --print-width 150 --jsx-bracket-same-line --parser flow --no-bracket-spacing --write",
       "git add"
     ]
