@@ -98,6 +98,7 @@ Temporary Items
 .idea/**/shelf
 
 # Sensitive or high-churn files
+.idea
 .idea/**/dataSources/
 .idea/**/dataSources.ids
 .idea/**/dataSources.local.xml
@@ -140,4 +141,16 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+.idea/dataSources.local.xml
+.idea/dataSources/
+.idea/dictionaries/
+.idea/inspectionProfiles/
+.idea/workspace.xml
 
+
+
+
+yarn-error.log
+
+
+node_modules
