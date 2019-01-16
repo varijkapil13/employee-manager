@@ -34,38 +34,31 @@ class Users {
       }
     });
   }
+
   static signUp(req, res) {
     const {email, password, roles, first_name, last_name} = req.body;
     Avatar.create({
       first_name,
       last_name,
       email
-    }).then(avatar => {
-      if (avatar) {
+    })
+      .then(avatar => {
         return User.create({
           email,
           password,
           avatarId: avatar.id,
           roles
-        }).then(userData =>
-          res.status(201).send({
-            success: true,
-            message: 'User successfully created',
-            userData
-          })
-        );
-      } else {
-        return res.status(400).send({
-          status: false,
-          errors: [
-            {
-              name: 'No Avatar found',
-              details: 'Avatar with id ' + avatarId + ' was not found in the database'
-            }
-          ]
-        });
-      }
-    });
+        })
+          .then(userData =>
+            res.status(201).send({
+              success: true,
+              message: 'User successfully created',
+              userData
+            })
+          )
+          .catch(error => res.status(400).send(error));
+      })
+      .catch(error => res.status(400).send(error));
   }
 }
 
