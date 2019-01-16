@@ -23,11 +23,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       from: {
-        allowNull: false,
         type: Sequelize.TIME
       },
       to: {
-        allowNull: false,
         type: Sequelize.TIME
       },
       logged_hours: {
