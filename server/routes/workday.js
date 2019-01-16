@@ -9,6 +9,9 @@ routes.post('/upload', upload.single('reportFile'), (req, res, next) => {
     const workbook = XLSX.read(req.file.buffer, {type: "buffer"});
     const sheet_name_list = workbook.SheetNames;
     const sheet_in_json = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[1]]);
+     for (let element of sheet_in_json){
+         console.log(element);
+     }
 
 
     return res.status(200).send({
