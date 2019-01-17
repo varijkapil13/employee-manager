@@ -2,8 +2,8 @@ import * as XLSX from 'xlsx';
 import moment from 'moment';
 import model from '../models';
 
-const {WorkDay} = model;
-const {Avatar} = model;
+const {WorkDay, Avatar} = model;
+
 class Workdays {
   /**
    *
@@ -71,6 +71,39 @@ class Workdays {
                 details: 'User with id ' + user_id + ' was not found in the database'
               }
             ]
+          });
+        }
+      })
+      .catch(error => res.status(400).send(error));
+  }
+
+  static addWorkday(req, res) {
+    const avatarId = req.params.avatarId;
+    const {date, tags, notes, from, to, logged_hours} = req.body;
+    Avatar.findByPk(avatarId)
+      .then(avatar => {
+        if (avatar) {
+          WorkDay.create({
+            date,
+            tags,
+            notes,
+            from,
+            to,
+            logged_hours,
+            avatarId
+          })
+            .then(workday => {
+              return res.status(201).send({
+                status: true,
+                message: 'Workday successfully added for ' + avatar.first_name + ' ' + avatar.last_name,
+                workday
+              });
+            })
+            .catch(error => res.status(400).send(error));
+        } else {
+          return res.status(400).send({
+            status: false,
+            message: 'Avatar with id ' + avatarId + ' not found'
           });
         }
       })

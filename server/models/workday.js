@@ -2,11 +2,11 @@ export default (sequelize, DataTypes) => {
   const WorkDay = sequelize.define(
     'WorkDay',
     {
-      user_id: {
+      avatarId: {
         type: DataTypes.INTEGER,
         allowNull: {
           args: false,
-          msg: "Please enter user's name"
+          msg: 'Please provide avatar id'
         }
       },
       date: {
@@ -20,7 +20,7 @@ export default (sequelize, DataTypes) => {
       notes: DataTypes.STRING,
       from: DataTypes.TIME,
       to: DataTypes.TIME,
-      logged_hours: {type: DataTypes.DOUBLE}
+      logged_hours: DataTypes.DOUBLE
     },
     {}
   );
