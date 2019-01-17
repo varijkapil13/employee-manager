@@ -1,4 +1,5 @@
 import model from '../models';
+import moment from 'moment';
 
 const {Holiday} = model;
 
@@ -7,7 +8,7 @@ class HolidayController {
     const {date, notes, from, to} = req.body;
 
     return Holiday.create({
-      date,
+      date: moment.utc(date),
       notes,
       from,
       to
@@ -25,17 +26,17 @@ class HolidayController {
   static deleteHoliday(req, res) {
     const holidayId = req.params.holidayId;
 
-    Holiday.findById(holidayId).then(holiday => {
+    Holiday.findByPk(holidayId).then(holiday => {
       if (!holiday) {
         return res.status(400).send({
-          message: 'Avatar Not Found'
+          message: 'Holiday Not Found'
         });
       } else {
         holiday
           .destroy()
           .then(() =>
             res.status(200).send({
-              message: 'Avatar successfully deleted'
+              message: 'Holiday successfully deleted'
             })
           )
           .catch(error => res.status(400).send(error));
@@ -44,16 +45,15 @@ class HolidayController {
   }
 
   static getAllHolidays(req, res) {
-    Holiday.findAll().then(holidays => {
-      return res
-        .status(200)
-        .send({
+    Holiday.findAll()
+      .then(holidays => {
+        return res.status(200).send({
           status: true,
           message: 'Found holidays',
           holidays
-        })
-        .catch(error => res.status(400).send(error));
-    });
+        });
+      })
+      .catch(error => res.status(400).send(error));
   }
 }
 

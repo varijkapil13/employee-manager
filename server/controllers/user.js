@@ -7,32 +7,31 @@ class Users {
   static signUpWithAvatar(req, res) {
     const {email, password, roles} = req.body;
     const avatarId = req.params.avatarId;
-    Avatar.findById(avatarId).then(avatar => {
-      if (avatar) {
-        return User.create({
-          email,
-          password,
-          avatarId,
-          roles
-        }).then(userData =>
-          res.status(201).send({
-            success: true,
-            message: 'User successfully created',
-            userData
+    Avatar.findByPk(avatarId)
+      .then(avatar => {
+        if (avatar) {
+          return User.create({
+            email,
+            password,
+            avatarId,
+            roles
           })
-        );
-      } else {
-        return res.status(400).send({
-          status: false,
-          errors: [
-            {
-              name: 'No Avatar found',
-              details: 'Avatar with id ' + avatarId + ' was not found in the database'
-            }
-          ]
-        });
-      }
-    });
+            .then(userData =>
+              res.status(201).send({
+                success: true,
+                message: 'User successfully created',
+                userData
+              })
+            )
+            .catch(error => res.status(400).send(error));
+        } else {
+          return res.status(400).send({
+            status: false,
+            message: 'Avatar with id ' + avatarId + ' was not found in the database'
+          });
+        }
+      })
+      .catch(error => res.status(400).send(error));
   }
 
   static signUp(req, res) {
