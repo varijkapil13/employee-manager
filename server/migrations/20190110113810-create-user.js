@@ -16,17 +16,17 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      avatarId : {
+      avatarId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Avatars',
           key: 'id',
-          as: 'avatarId',
+          as: 'avatarId'
         }
       },
       roles: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
