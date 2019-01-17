@@ -1,11 +1,11 @@
 import express from 'express';
 import multer from 'multer';
-import Workday from '../controllers/workday';
+import WorkdayController from '../controllers/workday.controller';
 
 const routes = express.Router();
 const upload = multer({storage: multer.memoryStorage()});
 
-routes.post('/:avatarId/upload', upload.single('reportFile'), Workday.importTimelyFile);
-routes.post('/:avatarId', Workday.addWorkday);
+routes.post('/:avatarId/upload', upload.single('reportFile'), WorkdayController.importTimelyFile);
+routes.post('/:avatarId', WorkdayController.addWorkday);
 
 export default routes;

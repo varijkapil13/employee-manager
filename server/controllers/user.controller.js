@@ -1,9 +1,8 @@
 import model from '../models';
 
-const {User} = model;
-const {Avatar} = model;
+const {User, Avatar} = model;
 
-class Users {
+class UserController {
   static signUpWithAvatar(req, res) {
     const {email, password, roles} = req.body;
     const avatarId = req.params.avatarId;
@@ -61,4 +60,4 @@ class Users {
   }
 }
 
-export default Users;
+export default UserController;

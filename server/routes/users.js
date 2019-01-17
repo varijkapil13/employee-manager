@@ -1,10 +1,10 @@
 import express from 'express';
-import User from '../controllers/user';
+import UserController from '../controllers/user.controller';
 
 const routes = express.Router();
 
 // sign ip with avatar id
-routes.post('/signup/:avatarId', User.signUpWithAvatar);
-routes.post('/signup', User.signUp);
+routes.post('/signup/:avatarId', UserController.signUpWithAvatar);
+routes.post('/signup', UserController.signUp);
 
 export default routes;

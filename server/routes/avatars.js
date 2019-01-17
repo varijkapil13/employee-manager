@@ -1,9 +1,9 @@
 import express from 'express';
 const routes = express.Router();
-import Avatars from "../controllers/avatar";
+import AvatarController from '../controllers/avatar.controller';
 
-routes.get('/', Avatars.list);
-routes.put('/:avatarId', Avatars.modify);
-routes.delete('/:avatarId', Avatars.delete);
+routes.get('/', AvatarController.list);
+routes.put('/:avatarId', AvatarController.modify);
+routes.delete('/:avatarId', AvatarController.delete);
 
 export default routes;

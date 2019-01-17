@@ -1,5 +1,5 @@
 import express from 'express';
-import LeaveController from '../controllers/leave';
+import LeaveController from '../controllers/leave.controller';
 
 const routes = express.Router();
 

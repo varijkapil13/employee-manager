@@ -4,7 +4,7 @@ import model from '../models';
 
 const {WorkDay, Avatar} = model;
 
-class Workdays {
+class WorkdayController {
   /**
    *
    * @param req
@@ -111,4 +111,4 @@ class Workdays {
   }
 }
 
-export default Workdays;
+export default WorkdayController;
