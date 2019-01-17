@@ -13,11 +13,11 @@ class HolidayController {
       from,
       to
     })
-      .then(holidayData =>
+      .then(holiday =>
         res.status(201).send({
           success: true,
           message: 'Holiday was successfully added',
-          holidayData
+          holiday
         })
       )
       .catch(error => res.status(400).send(error));
@@ -47,9 +47,13 @@ class HolidayController {
   static getAllHolidays(req, res) {
     Holiday.findAll()
       .then(holidays => {
+        let message = 'Holidays successfully retrieved';
+        if (holidays.length <= 0) {
+          message = 'No holidays were found';
+        }
         return res.status(200).send({
           status: true,
-          message: 'Found holidays',
+          message,
           holidays
         });
       })
