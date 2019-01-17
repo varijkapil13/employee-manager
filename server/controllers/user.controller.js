@@ -1,6 +1,5 @@
 import model from '../models';
 import crypto from 'crypto';
-import user from '../models/user';
 
 const {User, Avatar} = model;
 
@@ -86,7 +85,7 @@ class UserController {
       .catch(error => res.status(400).send(error));
   }
 
-  static login(req, res) {
+  static login(req, res, next) {
     const {email, password} = req.body;
 
     User.findAll({
@@ -108,13 +107,15 @@ class UserController {
             // passwords are same, user authenticated
             Avatar.findByPk(user[0].avatarId)
               .then(avatar => {
-                return res.status(200).send({
+                req.body = {
                   userId: user[0].id,
                   email: user[0].email,
                   roles: user[0].roles,
                   provider: 'email',
                   name: avatar.first_name + ' ' + avatar.last_name
-                });
+                };
+
+                return next();
               })
               .catch(error => {
                 res.status(400).send(error);
