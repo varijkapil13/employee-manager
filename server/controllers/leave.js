@@ -6,9 +6,9 @@ const {Leave, Avatar} = model;
 class LeaveController {
   static addLeave(req, res) {
     const {date, notes, from, to} = req.body;
-    const user_id = req.params.userId;
+    const avatarId = req.params.avatarId;
 
-    Avatar.findByPk(user_id)
+    Avatar.findByPk(avatarId)
       .then(user => {
         if (user) {
           return Leave.create({
@@ -16,7 +16,7 @@ class LeaveController {
             notes,
             from,
             to,
-            user_id
+            avatarId
           })
             .then(leave =>
               res.status(201).send({
@@ -29,7 +29,7 @@ class LeaveController {
         } else {
           return res.status(400).send({
             status: false,
-            message: 'User with id ' + user_id + ' not found'
+            message: 'User with id ' + avatarId + ' not found'
           });
         }
       })
@@ -61,7 +61,6 @@ class LeaveController {
     Leave.findAll()
       .then(leaves => {
         let message = 'Leaves successfully retrieved';
-        console.log(leaves.length);
         if (leaves.length <= 0) {
           message = 'No leaves were found';
         }
