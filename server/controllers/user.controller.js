@@ -1,11 +1,12 @@
 import model from '../models';
 import crypto from 'crypto';
+import RoleController from '../common/role.controller';
 
 const {User, Avatar} = model;
 
 class UserController {
   static signUpWithAvatar(req, res) {
-    const {email, password, roles} = req.body;
+    const {password, roles} = req.body;
     // hash the password before saving in the database
     const salt = crypto.randomBytes(16).toString('base64');
     const hash = crypto
@@ -17,19 +18,19 @@ class UserController {
     const avatarId = req.params.avatarId;
     User.findAll({
       where: {avatarId},
-      attributes: {include: ['id', 'email', 'avatarId', 'createdAt']}
+      attributes: {include: ['id', 'email', 'avatarId', 'createdAt'], exclude: ['password']}
     }).then(user => {
-      if (user) {
+      if (user.length > 0) {
         return res.status(400).send({message: 'User with avatar id ' + avatarId + ' already exists', user});
       } else {
         Avatar.findByPk(avatarId)
           .then(avatar => {
             if (avatar) {
               return User.create({
-                email,
+                email: avatar.email,
                 password: hashedPassword,
                 avatarId,
-                roles
+                roles: RoleController.convertToInteger(roles)
               })
                 .then(userData =>
                   res.status(201).send({
@@ -71,7 +72,7 @@ class UserController {
           email,
           password: hashedPassword,
           avatarId: avatar.id,
-          roles
+          roles: RoleController.convertToInteger(roles)
         })
           .then(userData =>
             res.status(201).send({

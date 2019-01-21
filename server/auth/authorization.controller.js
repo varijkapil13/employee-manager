@@ -1,6 +1,9 @@
 import * as jwt from 'jsonwebtoken';
 import crypto from 'crypto';
-const jwtSecret = 'aJWTSecret13121992for13121992jwtTokenInTheRequest13121992';
+import configuration from '../common/env.config';
+
+const {jwtSecret} = configuration;
+// created using the following tutorial : https://www.toptal.com/nodejs/secure-rest-api-in-nodejs
 class AuthorizationController {
   static login(req, res) {
     try {
