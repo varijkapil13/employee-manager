@@ -128,6 +128,40 @@ class UserController {
         res.status(400).send(error);
       });
   }
+
+  static getAllUsers(req, res) {
+    User.findAll()
+      .then(users => {
+        let message = 'Users successfully retrieved';
+        if (users.length <= 0) {
+          message = 'No users were found';
+        }
+        return res.status(200).send({
+          status: true,
+          message,
+          users
+        });
+      })
+      .catch(error => res.status(400).send(error));
+  }
+  static getUser(req, res) {
+    const userId = req.params.userId;
+    User.find({
+      where: {id: userId}
+    })
+      .then(user => {
+        let message = 'Leaves successfully retrieved';
+        if (user) {
+          message = 'No leaves were found';
+        }
+        return res.status(200).send({
+          status: true,
+          message,
+          user
+        });
+      })
+      .catch(error => res.status(400).send(error));
+  }
 }
 
 export default UserController;

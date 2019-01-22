@@ -72,6 +72,25 @@ class LeaveController {
       })
       .catch(error => res.status(400).send(error));
   }
+
+  static getUserLeaves(req, res) {
+    const avatarId = req.params.avatarId;
+    Leave.findAll({
+      where: {avatarId}
+    })
+      .then(leaves => {
+        let message = 'Leaves successfully retrieved';
+        if (leaves.length <= 0) {
+          message = 'No leaves were found';
+        }
+        return res.status(200).send({
+          status: true,
+          message,
+          leaves
+        });
+      })
+      .catch(error => res.status(400).send(error));
+  }
 }
 
 export default LeaveController;

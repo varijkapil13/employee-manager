@@ -109,6 +109,41 @@ class WorkdayController {
       })
       .catch(error => res.status(400).send(error));
   }
+
+  static getUserWorkdays(req, res) {
+    const avatarId = req.params.avatarId;
+    WorkDay.findAll({
+      where: {avatarId}
+    })
+      .then(workdays => {
+        let message = 'Workdays successfully retrieved';
+        if (workdays.length <= 0) {
+          message = 'No workdays were found';
+        }
+        return res.status(200).send({
+          status: true,
+          message,
+          workdays
+        });
+      })
+      .catch(error => res.status(400).send(error));
+  }
+
+  static getAllWorkdays(req, res) {
+    WorkDay.findAll()
+      .then(workdays => {
+        let message = 'Workdays successfully retrieved';
+        if (workdays.length <= 0) {
+          message = 'No workdays were found';
+        }
+        return res.status(200).send({
+          status: true,
+          message,
+          workdays
+        });
+      })
+      .catch(error => res.status(400).send(error));
+  }
 }
 
 export default WorkdayController;

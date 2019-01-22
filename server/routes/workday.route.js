@@ -5,9 +5,7 @@ import PermissionController from '../auth/permission.controller';
 import AuthorizationValidationController from '../auth/authorization.validation.controller';
 import configuration from '../common/env.config';
 
-const ADMIN = configuration.permissions.ADMIN;
-const MANAGER = configuration.permissions.MANAGER;
-const USER = configuration.permissions.USER;
+const {ADMIN, MANAGER, USER} = configuration.permissions;
 
 const routes = express.Router();
 const upload = multer({storage: multer.memoryStorage()});
@@ -21,6 +19,18 @@ routes.post('/:avatarId', [
   AuthorizationValidationController.validJWTNeeded,
   PermissionController.minimumPermissionRequired(MANAGER),
   WorkdayController.addWorkday
+]);
+
+routes.get('/:avatarId', [
+  AuthorizationValidationController.validJWTNeeded,
+  PermissionController.minimumPermissionRequired(USER),
+  WorkdayController.getUserWorkdays
+]);
+
+routes.get('/', [
+  AuthorizationValidationController.validJWTNeeded,
+  PermissionController.minimumPermissionRequired(MANAGER),
+  WorkdayController.getUserWorkdays
 ]);
 
 export default routes;
