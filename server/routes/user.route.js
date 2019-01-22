@@ -20,7 +20,9 @@ routes.post('/signup', [
   PermissionController.minimumPermissionRequired(ADMIN),
   UserController.signUp
 ]);
+
 routes.post('/login', [UserController.login, AuthorizationController.login]);
+
 routes.get('/', [
   AuthorizationValidationController.validJWTNeeded,
   PermissionController.minimumPermissionRequired(ADMIN),

@@ -1,5 +1,5 @@
 const configuration = {
-  jwtSecret: '',
+  jwtSecret: 'ThisIsA2019JWT2019secretForATemporaryPeriod2019Test345Environment!@#&',
   jwtExpirationInSeconds: 36000,
   permissions: {
     USER: 1,
