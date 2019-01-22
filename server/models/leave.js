@@ -17,6 +17,10 @@ export default (sequelize, DataTypes) => {
         }
       },
       notes: DataTypes.STRING,
+      overtime: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+      },
       from: {
         type: DataTypes.TIME,
         allowNull: {

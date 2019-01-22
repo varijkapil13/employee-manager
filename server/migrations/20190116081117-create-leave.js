@@ -16,6 +16,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
+      overtime: {
+        type: Sequelize.BOOLEAN
+      },
       notes: {
         type: Sequelize.STRING
       },
