@@ -1175,6 +1175,13 @@ console-control-strings@^1.0.0, console-control-strings@~1.1.0:
   resolved "https://registry.yarnpkg.com/console-control-strings/-/console-control-strings-1.1.0.tgz#3d7cf4464db6446ea644bf4b39507f9851008e8e"
   integrity sha1-PXz0Rk22RG6mRL9LOVB/mFEAjo4=
 
+contained-periodic-values@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/contained-periodic-values/-/contained-periodic-values-1.0.0.tgz#a81dd8e84e0a5513d590a1e6581bfe55c00f9c4d"
+  integrity sha1-qB3Y6E4KVRPVkKHmWBv+VcAPnE0=
+  dependencies:
+    nearest-periodic-value "^1.0.0"
+
 content-disposition@0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.2.tgz#0cf68bb9ddf5f2be7961c3a85178cb85dba78cb4"
@@ -2544,6 +2551,13 @@ jws@^3.1.5:
     jwa "^1.1.5"
     safe-buffer "^5.0.1"
 
+kexec@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/kexec/-/kexec-3.0.0.tgz#0ef4aa9d3caa26180c11a10075ac1fce2681e36c"
+  integrity sha1-DvSqnTyqJhgMEaEAdawfziaB42w=
+  dependencies:
+    nan "^2.4.0"
+
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
@@ -2948,6 +2962,14 @@ mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0:
   dependencies:
     minimist "0.0.8"
 
+moment-business@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/moment-business/-/moment-business-3.0.1.tgz#df0de1a8a074060652b5688d3cc99c9d8b76dcc4"
+  integrity sha1-3w3hqKB0BgZStWiNPMmcnYt23MQ=
+  dependencies:
+    contained-periodic-values "^1.0.0"
+    skipped-periodic-values "^1.0.0"
+
 moment-timezone@^0.5.14:
   version "0.5.23"
   resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.23.tgz#7cbb00db2c14c71b19303cb47b0fb0a6d8651463"
@@ -3000,7 +3022,7 @@ multer@^1.4.1:
     type-is "^1.6.4"
     xtend "^4.0.0"
 
-nan@^2.9.2:
+nan@^2.4.0, nan@^2.9.2:
   version "2.12.1"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.12.1.tgz#7b1aa193e9aa86057e3c7bbd0ac448e770925552"
   integrity sha512-JY7V6lRkStKcKTvHO5NVSQRv+RV+FIL5pvDoLiAtSL9pKlC5x9PKQcZDsq7m4FO4d57mkhC6Z+QhAh3Jdk5JFw==
@@ -3021,6 +3043,11 @@ nanomatch@^1.2.9:
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
+
+nearest-periodic-value@^1.0.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/nearest-periodic-value/-/nearest-periodic-value-1.2.0.tgz#a84fd52919a89692864d20a41468313d255905c6"
+  integrity sha1-qE/VKRmolpKGTSCkFGgxPSVZBcY=
 
 needle@^2.2.1:
   version "2.2.4"
@@ -3977,6 +4004,13 @@ simple-git@^1.85.0:
   integrity sha512-t4OK1JRlp4ayKRfcW6owrWcRVLyHRUlhGd0uN6ZZTqfDq8a5XpcUdOKiGRNobHEuMtNqzp0vcJNvhYWwh5PsQA==
   dependencies:
     debug "^4.0.1"
+
+skipped-periodic-values@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/skipped-periodic-values/-/skipped-periodic-values-1.0.1.tgz#d3a0a4d93ac134c4550db2a8823ed9d9739ceca2"
+  integrity sha1-06Ck2TrBNMRVDbKogj7Z2XOc7KI=
+  dependencies:
+    nearest-periodic-value "^1.0.0"
 
 slash@^1.0.0:
   version "1.0.0"

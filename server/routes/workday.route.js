@@ -27,10 +27,15 @@ routes.get('/:avatarId', [
   WorkdayController.getUserWorkdays
 ]);
 
+/**
+ * query params
+ * @param {Integer} year
+ * @param {Integer} month
+ */
 routes.get('/', [
-  AuthorizationValidationController.validJWTNeeded,
-  PermissionController.minimumPermissionRequired(MANAGER),
-  WorkdayController.getUserWorkdays
+  //AuthorizationValidationController.validJWTNeeded,
+  // PermissionController.minimumPermissionRequired(MANAGER),
+  WorkdayController.getAllWorkdays
 ]);
 
 export default routes;

@@ -870,6 +870,40 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
+"@devexpress/dx-core@1.10.0", "@devexpress/dx-core@^1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-core/-/dx-core-1.10.0.tgz#3fe39d57211aecdf54eed093611e74bf6d1fd1be"
+  integrity sha512-9EZ11t1SIqpgTk+Rn6bwpqyosnC/L7GUTkb7+6R1aw8XmFkPeVtyWBAj/DiCFPouM1nph89Xbl1pxevLL4jKpw==
+
+"@devexpress/dx-grid-core@1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-grid-core/-/dx-grid-core-1.10.0.tgz#00f074ee26e693c1bdcc65fe1c31f2aa8f318d3c"
+  integrity sha512-ew0FXp649vU8kHHhRbr+i8gBMdaTiyjNjbRhtqNNYMygc4lUaxfczobr3fztCafVUPViPm9JWCp3XnqHx4VE4Q==
+
+"@devexpress/dx-react-core@^1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-core/-/dx-react-core-1.10.0.tgz#decee512278268edc9d0ea9eb21ec0edbf33f0f9"
+  integrity sha512-yzfAaMDfcScXOVS4h1MnmuW+AwSFOcSd0C5MQ921rJdFxqNYbbjj9z2mCpoSEr2iYvE/PwbWMsJIjTTPFlvAIg==
+  dependencies:
+    "@devexpress/dx-core" "1.10.0"
+    prop-types "^15.6.2"
+
+"@devexpress/dx-react-grid-material-ui@^1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-grid-material-ui/-/dx-react-grid-material-ui-1.10.0.tgz#9ef9ef56c3f1fab1d14db38072b0f4402a2772ea"
+  integrity sha512-EtxRAe1FQVuQnUQZoORMbLLBDms8P5TIXLdabT5I6+LGb0Dv+SNniXH6iHmhZ6aqmVHSMWtSm0rGBnKb23l4hQ==
+  dependencies:
+    classnames "^2.2.6"
+    prop-types "^15.6.2"
+
+"@devexpress/dx-react-grid@^1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-grid/-/dx-react-grid-1.10.0.tgz#eea6d0c6b54638731c097f6f01b3442095c873fa"
+  integrity sha512-igmq/25Mt/7PbTlsANjOvE2CZZxZIjPk/i+TBhmL9CqSEUgNxOg+4WO516AsDDDw0ktlUeahpHu5I5Y6HgaflQ==
+  dependencies:
+    "@devexpress/dx-grid-core" "1.10.0"
+    prop-types "^15.6.2"
+
 "@material-ui/core@^3.9.1":
   version "3.9.1"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-3.9.1.tgz#994fa54f0936092556d231d1055b8f76b12be06e"
@@ -2304,7 +2338,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5:
+classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==

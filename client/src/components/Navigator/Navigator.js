@@ -44,7 +44,7 @@ const Navigator = props => {
   return (
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
-        <ListItem className={classNames(classes.firebase, classes.item, classes.itemCategory)}>Paperbase</ListItem>
+        <ListItem className={classNames(classes.firebase, classes.item, classes.itemCategory)}>Employee Manager</ListItem>
         <ListItem className={classNames(classes.item, classes.itemCategory)}>
           <ListItemIcon>
             <HomeIcon />

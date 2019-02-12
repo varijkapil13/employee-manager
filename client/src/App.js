@@ -15,37 +15,44 @@ function App(props) {
   const [userData, setUserData] = useState(undefined);
   const {classes} = props;
 
+  const accessToken = userData ? userData.accessToken : undefined;
+
+  const updateUserData = userData => {
+    setUserData(userData);
+  };
+
+  // if (!accessToken) {
+  /*show login screen when the user is not logged in*/
+  // return <LoginDialog callback={updateUserData} />;
+  // }
   return (
     <MuiThemeProvider theme={theme}>
       <SnackbarProvider maxSnack={3}>
         <div className={classes.root}>
           <CssBaseline />
-          {/*show login screen when the user is not logged in*/}
-          {userData || <LoginDialog />}
+
           {/*When the user has been logged in show the app*/}
-          {userData && (
-            <>
-              <nav className={classes.drawer}>
-                <Hidden smUp implementation="js">
-                  <Navigator
-                    PaperProps={{style: {width: drawerWidth}}}
-                    variant="temporary"
-                    open={mobileOpen}
-                    onClose={() => setMobileOpen(!mobileOpen)}
-                  />
-                </Hidden>
-                <Hidden xsDown implementation="css">
-                  <Navigator PaperProps={{style: {width: drawerWidth}}} />
-                </Hidden>
-              </nav>
-              <div className={classes.appContent}>
-                <Header onDrawerToggle={() => setMobileOpen(!mobileOpen)} />
-                <main className={classes.mainContent}>
-                  <Content />
-                </main>
-              </div>
-            </>
-          )}
+          <>
+            <nav className={classes.drawer}>
+              <Hidden smUp implementation="js">
+                <Navigator
+                  PaperProps={{style: {width: drawerWidth}}}
+                  variant="temporary"
+                  open={mobileOpen}
+                  onClose={() => setMobileOpen(!mobileOpen)}
+                />
+              </Hidden>
+              <Hidden xsDown implementation="css">
+                <Navigator PaperProps={{style: {width: drawerWidth}}} />
+              </Hidden>
+            </nav>
+            <div className={classes.appContent}>
+              <Header onDrawerToggle={() => setMobileOpen(!mobileOpen)} />
+              <main className={classes.mainContent}>
+                <Content />
+              </main>
+            </div>
+          </>
         </div>
       </SnackbarProvider>
     </MuiThemeProvider>

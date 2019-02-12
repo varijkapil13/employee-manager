@@ -239,9 +239,13 @@ export const loginDialogStyles = theme => ({
   },
   withDarkImage: {
     backgroundImage: `url(${darkWall})`,
+    backgroundColor: 'black',
     backgroundSize: 'cover',
-    opacity: '0.6',
+    opacity: 1,
     height: '100%'
+  },
+  '.withDarkImage:nth-child(n)': {
+    opacity: 1
   },
   paper: {
     ...theme.mixins.gutters(),

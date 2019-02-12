@@ -13,6 +13,11 @@ import NavigationIcon from '@material-ui/icons/Navigation';
 import axios from 'axios';
 import {apiUrls} from '../../helpers/Constants/Constants';
 import {withSnackbar} from 'notistack';
+import Slide from '@material-ui/core/Slide/Slide';
+
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
 
 const LoginDialog = props => {
   const {classes} = props;
@@ -22,9 +27,19 @@ const LoginDialog = props => {
 
   const loginUser = () => {
     axios
-      .post(apiUrls.login)
-      .then(response => {})
-      .catch(error => {});
+      .post(apiUrls.login, {
+        email,
+        password
+      })
+      .then(response => {
+        console.log(response.data);
+        props.callback(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+        const errorMessage = error.data.message ? error.data.message : 'There was an error processing your request';
+        props.enqueueSnackbar(errorMessage, {variant: 'error'});
+      });
   };
   const onLoginClick = () => {
     // check email
@@ -41,7 +56,7 @@ const LoginDialog = props => {
     }
   };
   return (
-    <Dialog fullScreen open={true}>
+    <Dialog fullScreen open={true} TransitionComponent={Transition}>
       <Grid container spacing={40} className={classes.withDarkImage}>
         <Grid item xs={12}>
           <AppBar className={classes.appBar}>

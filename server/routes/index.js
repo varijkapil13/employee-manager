@@ -6,10 +6,10 @@ import workday from './workday.route';
 import leave from './leave.route';
 import holiday from './holiday.route';
 
-routes.use('/user', users);
-routes.use('/avatar', avatars);
-routes.use('/workday', workday);
-routes.use('/leave', leave);
-routes.use('/holiday', holiday);
+routes.use('/users', users);
+routes.use('/avatars', avatars);
+routes.use('/workdays', workday);
+routes.use('/leaves', leave);
+routes.use('/holidays', holiday);
 
 export default routes;
