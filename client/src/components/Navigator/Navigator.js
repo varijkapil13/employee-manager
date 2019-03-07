@@ -10,31 +10,25 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import PeopleIcon from '@material-ui/icons/People';
-import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
-import PermMediaOutlinedIcon from '@material-ui/icons/PhotoSizeSelectActual';
-import PublicIcon from '@material-ui/icons/Public';
-import SettingsEthernetIcon from '@material-ui/icons/SettingsEthernet';
-import SettingsInputComponentIcon from '@material-ui/icons/SettingsInputComponent';
-import TimerIcon from '@material-ui/icons/Timer';
-import SettingsIcon from '@material-ui/icons/Settings';
-import PhonelinkSetupIcon from '@material-ui/icons/PhonelinkSetup';
 import {navigatorStyles} from '../../helpers/styles/styles';
+import {Link} from 'react-router-dom';
 
 const categories = [
   {
-    id: 'Develop',
+    id: 'Administration',
     children: [
-      {id: 'Authentication', icon: <PeopleIcon />, active: true},
-      {id: 'Database', icon: <DnsRoundedIcon />},
-      {id: 'Storage', icon: <PermMediaOutlinedIcon />},
-      {id: 'Hosting', icon: <PublicIcon />},
-      {id: 'Functions', icon: <SettingsEthernetIcon />},
-      {id: 'ML Kit', icon: <SettingsInputComponentIcon />}
+      {id: 'Home', link: '/', icon: <HomeIcon />, active: true},
+      {id: 'Holidays', link: '/holidays', icon: <PeopleIcon />},
+      {id: 'Leaves', link: '/leaves', icon: <PeopleIcon />}
     ]
   },
   {
-    id: 'Quality',
-    children: [{id: 'Analytics', icon: <SettingsIcon />}, {id: 'Performance', icon: <TimerIcon />}, {id: 'Test Lab', icon: <PhonelinkSetupIcon />}]
+    id: 'Settings',
+    children: [
+      {id: 'Profile', link: '/profile', icon: <PeopleIcon />},
+      {id: 'Users', link: '/users', icon: <PeopleIcon />},
+      {id: 'Logout', link: '/', icon: <PeopleIcon />}
+    ]
   }
 ];
 
@@ -45,20 +39,9 @@ const Navigator = props => {
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
         <ListItem className={classNames(classes.firebase, classes.item, classes.itemCategory)}>Employee Manager</ListItem>
-        <ListItem className={classNames(classes.item, classes.itemCategory)}>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText
-            classes={{
-              primary: classes.itemPrimary
-            }}>
-            Project Overview
-          </ListItemText>
-        </ListItem>
         {categories.map(({id, children}) => (
           <React.Fragment key={id}>
-            <ListItem className={classes.categoryHeader}>
+            <ListItem className={classNames(classes.item, classes.itemCategory)}>
               <ListItemText
                 classes={{
                   primary: classes.categoryHeaderPrimary
@@ -66,17 +49,19 @@ const Navigator = props => {
                 {id}
               </ListItemText>
             </ListItem>
-            {children.map(({id: childId, icon, active}) => (
-              <ListItem button dense key={childId} className={classNames(classes.item, classes.itemActionable, active && classes.itemActiveItem)}>
-                <ListItemIcon>{icon}</ListItemIcon>
-                <ListItemText
-                  classes={{
-                    primary: classes.itemPrimary,
-                    textDense: classes.textDense
-                  }}>
-                  {childId}
-                </ListItemText>
-              </ListItem>
+            {children.map(({id: childId, link, icon, active}) => (
+              <Link to={link} className={''}>
+                <ListItem button dense key={childId} className={classNames(classes.item, classes.itemActionable, active && classes.itemActiveItem)}>
+                  <ListItemIcon>{icon}</ListItemIcon>
+                  <ListItemText
+                    classes={{
+                      primary: classes.itemPrimary,
+                      textDense: classes.textDense
+                    }}>
+                    {childId}{' '}
+                  </ListItemText>
+                </ListItem>
+              </Link>
             ))}
             <Divider className={classes.divider} />
           </React.Fragment>

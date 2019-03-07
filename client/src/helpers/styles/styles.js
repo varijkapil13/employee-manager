@@ -269,3 +269,16 @@ export const loginDialogStyles = theme => ({
     margin: theme.spacing.unit
   }
 });
+
+export const userTableStyles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3
+  },
+  table: {
+    minWidth: 500
+  },
+  tableWrapper: {
+    overflowX: 'auto'
+  }
+});
