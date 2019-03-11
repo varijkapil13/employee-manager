@@ -1,4 +1,4 @@
-import {LOGIN, TOGGLE_SIDEBAR} from '../action-types';
+import {loginPageActions} from '../action-types';
 
 const initialState = {
   user: {
@@ -12,13 +12,13 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case LOGIN:
+    case loginPageActions.LOGIN:
       return {
         ...state,
         user: action.payload.user,
         loggedIn: true
       };
-    case TOGGLE_SIDEBAR:
+    case loginPageActions.TOGGLE_SIDEBAR:
       return {
         ...state,
         mobileOpen: action.payload.mobileOpen

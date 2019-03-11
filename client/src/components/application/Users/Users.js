@@ -7,7 +7,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableBody from '@material-ui/core/TableBody';
 import TablePaginationActions from '@material-ui/core/TablePagination/TablePaginationActions';
 import {withStyles} from '@material-ui/core';
-import {userTableStyles} from '../../helpers/styles/styles';
+import {userTableStyles} from '../../../helpers/styles/styles';
 import * as PropTypes from 'prop-types';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Tooltip from '@material-ui/core/Tooltip';

@@ -132,7 +132,7 @@ export const appStyles = {
   },
   appContent: {
     flex: 1,
-    display: 'flex',
+    // display: 'flex',
     flexDirection: 'column'
   },
   mainContent: {
@@ -252,7 +252,7 @@ export const loginDialogStyles = theme => ({
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
     width: '50%',
-    display: 'flex',
+    // display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     opacity: '1'
@@ -281,4 +281,15 @@ export const userTableStyles = theme => ({
   tableWrapper: {
     overflowX: 'auto'
   }
+});
+
+export const calendarStyles = theme => ({
+  root: {
+    display: '-webkit-flex',
+    display: 'flex',
+    position: 'relative',
+    flex: 1,
+    overflow: 'hidden'
+  },
+  rbcMonthRow: {}
 });

@@ -27,10 +27,22 @@ const categories = [
     children: [
       {id: 'Profile', link: '/profile', icon: <PeopleIcon />},
       {id: 'Users', link: '/users', icon: <PeopleIcon />},
-      {id: 'Logout', link: '/', icon: <PeopleIcon />}
+      {id: 'Logout', link: '/logout', icon: <PeopleIcon />}
     ]
   }
 ];
+
+/**
+ *
+ * @param url : String - url of the window
+ * @param link : String - the link of the item to be checked
+ * @returns {boolean} - true/false if the link is active or not
+ */
+const isLinkActive = (url, link) => {
+  const splitUrl = url.split('/');
+  link = link.substring(0, 1) === '/' ? link.substring(1, link.length) : link;
+  return splitUrl[splitUrl.length - 1] === link;
+};
 
 const Navigator = props => {
   const {classes, ...other} = props;
@@ -51,7 +63,11 @@ const Navigator = props => {
             </ListItem>
             {children.map(({id: childId, link, icon, active}) => (
               <Link to={link} className={''}>
-                <ListItem button dense key={childId} className={classNames(classes.item, classes.itemActionable, active && classes.itemActiveItem)}>
+                <ListItem
+                  button
+                  dense
+                  key={childId}
+                  className={classNames(classes.item, classes.itemActionable, isLinkActive(window.location.href, link) && classes.itemActiveItem)}>
                   <ListItemIcon>{icon}</ListItemIcon>
                   <ListItemText
                     classes={{

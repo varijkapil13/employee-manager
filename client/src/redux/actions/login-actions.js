@@ -1,11 +1,11 @@
-import {LOGIN, TOGGLE_SIDEBAR} from '../action-types';
+import {loginPageActions} from '../action-types';
 
 export const loginUser = user => ({
-  type: LOGIN,
+  type: loginPageActions.LOGIN,
   payload: user
 });
 
 export const toggleSidebar = value => ({
-  type: TOGGLE_SIDEBAR,
+  type: loginPageActions.TOGGLE_SIDEBAR,
   payload: value
 });

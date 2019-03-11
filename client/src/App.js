@@ -7,7 +7,7 @@ import Hidden from '@material-ui/core/Hidden';
 import Navigator from './components/Navigator/Navigator';
 import Content from './components/Content/Content';
 import Header from './components/Header/Header';
-import LoginDialog from './components/LoginDialog/LoginDialog';
+import LoginDialog from './components/application/LoginDialog/LoginDialog';
 import {SnackbarProvider, withSnackbar} from 'notistack';
 import {BrowserRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -20,7 +20,6 @@ function App({classes, loggedIn, mobileOpen}) {
     this.props.loginUser(userData);
   };
 
-  console.log(loggedIn);
   if (!loggedIn) {
     /*show login screen when the user is not logged in*/
     return <LoginDialog callback={updateUserData} />;
@@ -66,22 +65,17 @@ App.propTypes = {
   enqueueSnackbar: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state /*, ownProps*/) => {
-  console.log(state);
+const mapStateToProps = state => {
   return {
-    user: state.user,
-    loggedIn: state.loggedIn,
-    mobileOpen: state.mobileOpen
+    user: state.login.user,
+    loggedIn: state.login.loggedIn,
+    mobileOpen: state.login.mobileOpen
   };
 };
 
 const mapDispatchToProps = {toggleSidebar, loginUser};
 
-export default withStyles(appStyles)(
-  withSnackbar(
-    connect(
-      mapStateToProps,
-      mapDispatchToProps
-    )(App)
-  )
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(appStyles)(App));

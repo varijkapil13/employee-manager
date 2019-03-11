@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import AppBar from '@material-ui/core/AppBar/AppBar';
 import Toolbar from '@material-ui/core/Toolbar/Toolbar';
 import Typography from '@material-ui/core/Typography/Typography';
-import {loginDialogStyles} from '../../helpers/styles/styles';
+import {loginDialogStyles} from '../../../helpers/styles/styles';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper/Paper';
 import TextField from '@material-ui/core/TextField/TextField';
@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid/Grid';
 import Fab from '@material-ui/core/Fab/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import axios from 'axios';
-import {apiUrls} from '../../helpers/Constants/Constants';
+import {apiUrls} from '../../../helpers/Constants/Constants';
 import {withSnackbar} from 'notistack';
 import Slide from '@material-ui/core/Slide/Slide';
 
