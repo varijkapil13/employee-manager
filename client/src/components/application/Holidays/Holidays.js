@@ -6,7 +6,22 @@ import '../../../helpers/styles/react-big-calendar.css';
 
 const localize = BigCalendar.momentLocalizer(moment);
 const Holidays = props => {
-  return <BigCalendar localizer={localize} events={props.holidays} startAccessor="start" endAccessor="end" defaultView={'month'} />;
+  const handleEventClick = event => {
+    console.log(event);
+  };
+
+  return (
+    <BigCalendar
+      popup
+      localizer={localize}
+      events={props.holidays}
+      startAccessor="start"
+      endAccessor="end"
+      defaultView={'month'}
+      views={['month', 'work_week']}
+      onSelectEvent={handleEventClick}
+    />
+  );
 };
 
 const mapStateToProps = state => {
