@@ -6,10 +6,10 @@ export const fetchHolidays = user => ({
 });
 
 export const addHoliday = value => ({
-  type: holidayActions.ADD_HOLIDAY,
+  type: holidayActions.ADD_HOLIDAYS,
   payload: value
 });
-export const delteHoliday = value => ({
-  type: holidayActions.DELETE_HOLIDAY,
+export const deleteHoliday = value => ({
+  type: holidayActions.DELETE_HOLIDAYS,
   payload: value
 });

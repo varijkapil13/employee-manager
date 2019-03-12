@@ -2,7 +2,7 @@ import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import React from 'react';
 import {connect} from 'react-redux';
-import '../../../helpers/styles/react-big-calendar.css';
+import '../../helpers/styles/react-big-calendar.css';
 
 const localize = BigCalendar.momentLocalizer(moment);
 const Holidays = props => {

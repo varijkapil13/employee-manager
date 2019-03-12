@@ -282,14 +282,3 @@ export const userTableStyles = theme => ({
     overflowX: 'auto'
   }
 });
-
-export const calendarStyles = theme => ({
-  root: {
-    display: '-webkit-flex',
-    display: 'flex',
-    position: 'relative',
-    flex: 1,
-    overflow: 'hidden'
-  },
-  rbcMonthRow: {}
-});
