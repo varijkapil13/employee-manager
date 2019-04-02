@@ -20,3 +20,8 @@ export const toggleCalendar = value => {
     payload: !value
   };
 };
+
+export const changeLeavesState = props => ({
+  type: leavesActions.UPDATE_STATE,
+  payload: props
+});

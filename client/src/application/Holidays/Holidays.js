@@ -1,10 +1,9 @@
 import BigCalendar from 'react-big-calendar';
-import moment from 'moment';
 import React from 'react';
 import {connect} from 'react-redux';
 import '../../helpers/styles/react-big-calendar.css';
+import {localize} from '../../helpers/Constants/Constants';
 
-const localize = BigCalendar.momentLocalizer(moment);
 const Holidays = props => {
   const handleEventClick = event => {
     console.log(event);
