@@ -1,10 +1,12 @@
 import model from '../models';
 import moment from 'moment';
 import * as sequelize from 'sequelize';
+import {calculateWorkdaysInTimePeriod} from '../utils/utils';
 
 const {Leave, Avatar, Holiday, WorkDay} = model;
 const Op = sequelize.Op;
 const startOfMonth = moment()
+  .subtract(1, 'month')
   .startOf('month')
   .toDate();
 const endOfMonth = moment(startOfMonth)
@@ -36,7 +38,6 @@ class HomeController {
         }
       }
     });
-    const avatar = Avatar.findById(avatarId);
 
     WorkDay.findAll({
       where: {
@@ -52,12 +53,31 @@ class HomeController {
     }).then(workday => {
       leaves.then(leaves => {
         holidays.then(holiday => {
-          avatar.then(avat => {
-            console.log(workday);
-            console.log(leaves);
-            console.log(holiday);
-            console.log(avat);
-          });
+          if (workday && workday.length > 0) {
+            const lastWorkday = workday[workday.length - 1].date;
+            // create holidays array for business days calculation
+            const holidaysInPeriod = holiday.map(item => moment(item.date).format('DD/MM/YYYY'));
+            // create leaves array for business days calculation
+
+            const leavesInPeriod = leaves.map(item => moment(item.date).format('DD/MM/YYYY'));
+            const workingDaysInPeriod = calculateWorkdaysInTimePeriod(startOfMonth, lastWorkday, [...holidaysInPeriod, ...leavesInPeriod]);
+            const workingHoursInPeriod = workingDaysInPeriod * 8;
+            const workedHoursByAvatarInPeriod = workday.reduce((acc, val) => acc + val.logged_hours, 0.0);
+            const overOrUnderTime = workedHoursByAvatarInPeriod - workingHoursInPeriod;
+            return res.status(200).send({
+              lastWorkday,
+              leavesInPeriod,
+              holidaysInPeriod,
+              workingDaysInPeriod,
+              workingHoursInPeriod,
+              workedHoursByAvatarInPeriod,
+              overOrUnderTime
+            });
+          } else {
+            return res.status(404).send({
+              message: 'No workdays found'
+            });
+          }
         });
       });
     });

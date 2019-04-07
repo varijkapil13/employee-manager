@@ -255,7 +255,6 @@ const createWorkdayDataForFrontend = (workdays, leaves, holidays, avatars, start
         } else {
           // get total hours
           const hours = workdayForDay.reduce((acc, value) => acc + value.logged_hours, 0.0);
-          console.log(hours);
         }
       }
     }
