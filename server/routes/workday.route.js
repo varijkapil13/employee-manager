@@ -5,14 +5,14 @@ import PermissionController from '../auth/permission.controller';
 import AuthorizationValidationController from '../auth/authorization.validation.controller';
 import configuration from '../common/env.config';
 
-const {ADMIN, MANAGER, USER} = configuration.permissions;
+const {MANAGER, USER} = configuration.permissions;
 
 const routes = express.Router();
 const upload = multer({storage: multer.memoryStorage()});
 
 routes.post('/:avatarId/upload', upload.single('reportFile'), [
-  AuthorizationValidationController.validJWTNeeded,
-  PermissionController.minimumPermissionRequired(MANAGER),
+  // AuthorizationValidationController.validJWTNeeded,
+  // PermissionController.minimumPermissionRequired(MANAGER),
   WorkdayController.importTimelyFile
 ]);
 routes.post('/:avatarId', [

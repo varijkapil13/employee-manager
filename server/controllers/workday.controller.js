@@ -3,6 +3,7 @@ import moment from 'moment';
 import business from 'moment-business';
 import model from '../models';
 import * as sequelize from 'sequelize';
+import {reduceWorkdayEntries} from '../utils/utils';
 
 const Op = sequelize.Op;
 const {WorkDay, Avatar, Holiday, Leave} = model;
@@ -27,21 +28,23 @@ class WorkdayController {
             const sheetInJson = XLSX.utils.sheet_to_json(workbook.Sheets[sheetNameList[1]]);
             // remove the first row from the array. because it contains only the total hours logged
             sheetInJson.shift();
-            const length = sheetInJson.length;
-            for (let element of sheetInJson) {
-              const nameInFile = element['Name'];
-              if (nameInFile === userName) {
+            // get existing entries for the user, do not add for a date that is already present
+            WorkDay.findAll({where: {avatarId: user_id}}).then(workdays => {
+              const dateList = workdays ? workdays.map(item => item.date) : [];
+              const reducedSheet = reduceWorkdayEntries(sheetInJson, user_id, userName, dateList);
+              const length = reducedSheet.length;
+              if (length <= 0) {
+                return res.status(200).send({
+                  status: true,
+                  msg: 'Entries already present in the database. No new entries were created'
+                });
+              }
+              for (let element of reducedSheet) {
                 WorkDay.create({
-                  user_id,
-                  date: moment.utc(element['Date'], 'DD/MM/YYYY').toDate(),
-                  from: element['From'],
-                  to: element['To'],
-                  logged_hours: element['Logged'],
-                  tags: element['Tags'],
-                  notes: element['Note']
+                  ...element
                 })
                   .then(() => {
-                    if (sheetInJson.indexOf(element) === length - 1) {
+                    if (reducedSheet.indexOf(element) === length - 1) {
                       return res.status(200).send({
                         status: true,
                         msg: 'Entries saved to database successfully'
@@ -53,7 +56,7 @@ class WorkdayController {
                     return res.status(400).send(error);
                   });
               }
-            }
+            });
           } else {
             return res.status(400).send({
               status: false,
@@ -77,7 +80,10 @@ class WorkdayController {
           });
         }
       })
-      .catch(error => res.status(400).send(error));
+      .catch(error => {
+        console.error(error);
+        res.status(400).send(error);
+      });
   }
 
   static addWorkday(req, res) {
