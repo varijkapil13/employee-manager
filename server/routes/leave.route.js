@@ -4,13 +4,19 @@ import configuration from '../common/env.config';
 import AuthorizationValidationController from '../auth/authorization.validation.controller';
 import PermissionController from '../auth/permission.controller';
 
-const {ADMIN, MANAGER, USER} = configuration.permissions;
+const {MANAGER, USER} = configuration.permissions;
 const routes = express.Router();
 
 routes.post('/:avatarId', [
   AuthorizationValidationController.validJWTNeeded,
-  PermissionController.minimumPermissionRequired(MANAGER),
+  PermissionController.minimumPermissionRequired(USER),
   LeaveController.addLeave
+]);
+
+routes.post('/multi/:avatarId', [
+  // AuthorizationValidationController.validJWTNeeded,
+  // PermissionController.minimumPermissionRequired(USER),
+  LeaveController.addMultipleLeaves
 ]);
 routes.delete('/:leaveId', [
   AuthorizationValidationController.validJWTNeeded,

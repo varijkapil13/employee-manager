@@ -4,6 +4,7 @@ import moment from 'moment-business-days';
  *
  * @param start
  * @param end
+ * @param holidays
  * @returns {number}
  */
 export const calculateWorkdaysInTimePeriod = (start, end, holidays) => {
@@ -82,4 +83,43 @@ export const reduceWorkdayEntries = (sheet, userId, userName, skipDates) => {
   }
 
   return reducedEntries;
+};
+
+export const generateLeaves = (leavesData, avatarId) => {
+  const {startDate, endDate, overtimeDates, notes} = leavesData;
+  if (!startDate || !endDate || !notes) {
+    return {
+      status: false,
+      message: 'Dates and Notes are required values!',
+      leaves: []
+    };
+  } else {
+    const overtime = overtimeDates ? overtimeDates.map(date => moment.utc(date)) : [];
+    const dateRange = createDatesArray(startDate, endDate);
+    const leaves = dateRange.map(date => {
+      return {
+        date,
+        overtime: overtime.filter(item => item.isSame(date, 'day')).length > 0,
+        notes,
+        avatarId
+      };
+    });
+
+    return {
+      status: true,
+      message: 'Leaves generated',
+      leaves
+    };
+  }
+};
+
+const createDatesArray = (start, end) => {
+  const startDate = moment.utc(start);
+  const endDate = moment.utc(end);
+  const difference = endDate.diff(startDate, 'day');
+  let datesArray = [];
+  for (let i = 0; i <= difference; i++) {
+    datesArray.push(startDate.clone().add(i, 'day'));
+  }
+  return datesArray;
 };

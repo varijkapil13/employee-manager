@@ -23,17 +23,15 @@ export default (sequelize, DataTypes) => {
       },
       from: {
         type: DataTypes.TIME,
-        allowNull: {
-          args: false,
-          msg: 'Please enter start time'
-        }
+        defaultValue: null
       },
       to: {
         type: DataTypes.TIME,
-        allowNull: {
-          args: false,
-          msg: 'Please enter end time'
-        }
+        defaultValue: null
+      },
+      approved: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
       }
     },
     {}
