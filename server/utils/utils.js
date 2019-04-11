@@ -123,3 +123,40 @@ const createDatesArray = (start, end) => {
   }
   return datesArray;
 };
+
+export const calculateOvertimeFromWorkdayHolidaAndLeaves = (workdays, holidays, leaves) => {
+  if (!workdays || workdays.length <= 0) {
+    return {
+      firstWorkday: '',
+      lastWorkday: '',
+      holidaysInPeriod: 0,
+      leavesInPeriod: 0,
+      workingDaysInPeriod: 0,
+      workingHoursInPeriod: 0,
+      workedHoursByAvatarInPeriod: 0,
+      overOrUnderTime: 0
+    };
+  }
+
+  const firstWorkday = workdays[0].date;
+  const lastWorkday = workdays[workdays.length - 1].date;
+  // create holidays array for business days calculation
+  const holidaysInPeriod = holidays.map(item => moment(item.date).format('DD/MM/YYYY'));
+  // create leaves array for business days calculation
+  const leavesInPeriod = leaves.map(item => moment(item.date).format('DD/MM/YYYY'));
+  const workingDaysInPeriod = calculateWorkdaysInTimePeriod(firstWorkday, lastWorkday, [...holidaysInPeriod, ...leavesInPeriod]);
+  const workingHoursInPeriod = workingDaysInPeriod * 8;
+  const workedHoursByAvatarInPeriod = workdays.reduce((acc, val) => acc + val.logged_hours, 0.0);
+  const overOrUnderTime = workedHoursByAvatarInPeriod - workingHoursInPeriod;
+
+  return {
+    firstWorkday,
+    lastWorkday,
+    holidaysInPeriod,
+    leavesInPeriod,
+    workingDaysInPeriod,
+    workingHoursInPeriod,
+    workedHoursByAvatarInPeriod,
+    overOrUnderTime
+  };
+};

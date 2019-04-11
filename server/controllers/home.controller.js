@@ -1,7 +1,7 @@
 import model from '../models';
 import moment from 'moment';
 import * as sequelize from 'sequelize';
-import {calculateWorkdaysInTimePeriod} from '../utils/utils';
+import {calculateOvertimeFromWorkdayHolidaAndLeaves} from '../utils/utils';
 
 const {Leave, Avatar, Holiday, WorkDay} = model;
 const Op = sequelize.Op;
@@ -54,24 +54,9 @@ class HomeController {
       leaves.then(leaves => {
         holidays.then(holiday => {
           if (workday && workday.length > 0) {
-            const lastWorkday = workday[workday.length - 1].date;
-            // create holidays array for business days calculation
-            const holidaysInPeriod = holiday.map(item => moment(item.date).format('DD/MM/YYYY'));
-            // create leaves array for business days calculation
-
-            const leavesInPeriod = leaves.map(item => moment(item.date).format('DD/MM/YYYY'));
-            const workingDaysInPeriod = calculateWorkdaysInTimePeriod(startOfMonth, lastWorkday, [...holidaysInPeriod, ...leavesInPeriod]);
-            const workingHoursInPeriod = workingDaysInPeriod * 8;
-            const workedHoursByAvatarInPeriod = workday.reduce((acc, val) => acc + val.logged_hours, 0.0);
-            const overOrUnderTime = workedHoursByAvatarInPeriod - workingHoursInPeriod;
+            const calculatedOvertime = calculateOvertimeFromWorkdayHolidaAndLeaves(workday, holiday, leaves);
             return res.status(200).send({
-              lastWorkday,
-              leavesInPeriod,
-              holidaysInPeriod,
-              workingDaysInPeriod,
-              workingHoursInPeriod,
-              workedHoursByAvatarInPeriod,
-              overOrUnderTime
+              ...calculatedOvertime
             });
           } else {
             return res.status(404).send({

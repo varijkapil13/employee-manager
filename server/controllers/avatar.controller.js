@@ -1,4 +1,5 @@
 import model from '../models';
+import OvertimeController from './overtime.controller';
 
 const {Avatar} = model;
 
@@ -9,17 +10,22 @@ class AvatarController {
       last_name,
       first_name,
       email
-    }).then(avatarData =>
-      res.status(201).send({
-        success: true,
-        message: 'Avatar successfully created',
-        avatarData
+    })
+      .then(async avatarData => {
+        await OvertimeController.initializeOvertimeForAvatarId(avatarData.id);
+        return res.status(201).send({
+          success: true,
+          message: 'Avatar successfully created',
+          avatarData
+        });
       })
-    );
+      .catch(error => res.status(400).send(error));
   }
 
   static list(req, res) {
-    return Avatar.findAll().then(avatars => res.status(200).send(avatars));
+    return Avatar.findAll()
+      .then(avatars => res.status(200).send(avatars))
+      .catch(error => res.status(400).send(error));
   }
 
   static modify(req, res) {
