@@ -1,32 +1,18 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Leaves', {
+    return queryInterface.createTable('Overtimes', {
       id: {
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER
       },
       avatarId: {
-        allowNull: false,
+        primaryKey: true,
         type: Sequelize.INTEGER
       },
-      date: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      overtime: {
-        type: Sequelize.BOOLEAN
-      },
-      notes: {
-        type: Sequelize.STRING
-      },
-      from: {
-        type: Sequelize.TIME
-      },
-      to: {
-        type: Sequelize.TIME
+      hours: {
+        type: Sequelize.DECIMAL(10, 2)
       },
       createdAt: {
         allowNull: false,
@@ -39,6 +25,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Leaves');
+    return queryInterface.dropTable('Overtimes');
   }
 };

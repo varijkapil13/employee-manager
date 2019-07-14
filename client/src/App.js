@@ -1,29 +1,37 @@
 import {appStyles, drawerWidth, theme} from './helpers/styles/styles';
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import * as PropTypes from 'prop-types';
 import {MuiThemeProvider, withStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
-import Navigator from './components/Navigator/Navigator';
-import Content from './components/Content/Content';
-import Header from './components/Header/Header';
-import LoginDialog from './components/LoginDialog/LoginDialog';
-import {SnackbarProvider, withSnackbar} from 'notistack';
+import Navigator from './frame/Navigator/Navigator';
+import Content from './frame/Content/Content';
+import Header from './frame/Header/Header';
+import LoginDialog from './application/LoginDialog/LoginDialog';
+import {SnackbarProvider} from 'notistack';
+import {BrowserRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {loginUser, toggleSidebar} from './redux/actions/login-actions';
 
-function App(props) {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [userData, setUserData] = useState(undefined);
-  const {classes} = props;
+function App({classes, loggedIn, mobileOpen}) {
+  // const accessToken = user ? user.accessToken : undefined;
 
+  const updateUserData = userData => {
+    this.props.loginUser(userData);
+  };
+
+  if (!loggedIn) {
+    /*show login screen when the user is not logged in*/
+    return <LoginDialog callback={updateUserData} />;
+  }
   return (
-    <MuiThemeProvider theme={theme}>
-      <SnackbarProvider maxSnack={3}>
-        <div className={classes.root}>
-          <CssBaseline />
-          {/*show login screen when the user is not logged in*/}
-          {userData || <LoginDialog />}
-          {/*When the user has been logged in show the app*/}
-          {userData && (
+    <BrowserRouter>
+      <MuiThemeProvider theme={theme}>
+        <SnackbarProvider maxSnack={3}>
+          <div className={classes.root}>
+            <CssBaseline />
+
+            {/*When the user has been logged in show the app*/}
             <>
               <nav className={classes.drawer}>
                 <Hidden smUp implementation="js">
@@ -31,7 +39,7 @@ function App(props) {
                     PaperProps={{style: {width: drawerWidth}}}
                     variant="temporary"
                     open={mobileOpen}
-                    onClose={() => setMobileOpen(!mobileOpen)}
+                    onClose={() => this.props.toggleSidebar(!mobileOpen)}
                   />
                 </Hidden>
                 <Hidden xsDown implementation="css">
@@ -39,16 +47,16 @@ function App(props) {
                 </Hidden>
               </nav>
               <div className={classes.appContent}>
-                <Header onDrawerToggle={() => setMobileOpen(!mobileOpen)} />
+                <Header onDrawerToggle={() => this.props.toggleSidebar(!mobileOpen)} />
                 <main className={classes.mainContent}>
                   <Content />
                 </main>
               </div>
             </>
-          )}
-        </div>
-      </SnackbarProvider>
-    </MuiThemeProvider>
+          </div>
+        </SnackbarProvider>
+      </MuiThemeProvider>
+    </BrowserRouter>
   );
 }
 
@@ -57,4 +65,17 @@ App.propTypes = {
   enqueueSnackbar: PropTypes.func.isRequired
 };
 
-export default withStyles(appStyles)(withSnackbar(App));
+const mapStateToProps = state => {
+  return {
+    user: state.login.user,
+    loggedIn: state.login.loggedIn,
+    mobileOpen: state.login.mobileOpen
+  };
+};
+
+const mapDispatchToProps = {toggleSidebar, loginUser};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(appStyles)(App));

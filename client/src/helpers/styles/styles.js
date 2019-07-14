@@ -132,7 +132,7 @@ export const appStyles = {
   },
   appContent: {
     flex: 1,
-    display: 'flex',
+    // display: 'flex',
     flexDirection: 'column'
   },
   mainContent: {
@@ -239,16 +239,20 @@ export const loginDialogStyles = theme => ({
   },
   withDarkImage: {
     backgroundImage: `url(${darkWall})`,
+    backgroundColor: 'black',
     backgroundSize: 'cover',
-    opacity: '0.6',
+    opacity: 1,
     height: '100%'
+  },
+  '.withDarkImage:nth-child(n)': {
+    opacity: 1
   },
   paper: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
     width: '50%',
-    display: 'flex',
+    // display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     opacity: '1'
@@ -263,5 +267,18 @@ export const loginDialogStyles = theme => ({
   },
   margin: {
     margin: theme.spacing.unit
+  }
+});
+
+export const userTableStyles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3
+  },
+  table: {
+    minWidth: 500
+  },
+  tableWrapper: {
+    overflowX: 'auto'
   }
 });
