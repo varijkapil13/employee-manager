@@ -38,7 +38,7 @@ const timelySheetKeys = {
   date: 'Date',
   from: 'From',
   to: 'To',
-  hoursLogged: 'Logged',
+  hoursLogged: 'Logged Hours',
   tags: 'Tags',
   notes: 'Note'
 };

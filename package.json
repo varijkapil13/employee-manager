@@ -8,7 +8,7 @@
   "dependencies": {
     "@babel/cli": "^7.4.3",
     "@babel/core": "^7.4.3",
-    "body-parser": "latest",
+    "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.3",
     "debug": "4.1.1",
     "express": "~4.16.0",
