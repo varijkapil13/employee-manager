@@ -44,7 +44,7 @@
     "prettier": "^1.16.4",
     "prop-types": "^15.7.2",
     "redux-devtools": "^3.5.0",
-    "semantic-release": "^17.2.3"
+    "semantic-release": "^19.0.3"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
